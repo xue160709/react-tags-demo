@@ -1,5 +1,5 @@
 'use client';
-import Tag from '@/components/Tags/Tag';
+import { Tag } from '@xue160709/react-tags';
 import { FiGithub, FiStar, FiTag } from 'react-icons/fi';
 
 // 定义演示区块的类型
