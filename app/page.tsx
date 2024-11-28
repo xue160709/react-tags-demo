@@ -1,6 +1,7 @@
 'use client';
 import { Tag } from '@xue160709/react-tags';
 import { FiGithub, FiStar, FiTag } from 'react-icons/fi';
+import { useState, useEffect } from 'react';
 
 // 定义演示区块的类型
 interface DemoSection {
@@ -58,6 +59,15 @@ const DemoBlock: React.FC<DemoSection> = ({ title, description, content }) => (
 
 // 主页组件
 export default function Home() {
+  const [starCount, setStarCount] = useState<number>(0);
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/xue160709/react-tags')
+      .then(res => res.json())
+      .then(data => setStarCount(data.stargazers_count))
+      .catch(err => console.error('获取 star 数量失败:', err));
+  }, []);
+
   const demoSections: DemoSection[] = [
     {
       title: 'Basic Colors',
@@ -225,9 +235,22 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-8 relative">
+      <a
+        href="https://github.com/xue160709/react-tags"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute top-8 right-8 flex items-center gap-2 text-gray-700 hover:text-gray-900"
+      >
+        <FiGithub className="text-xl" />
+        <span className="flex items-center gap-1">
+          <FiStar className="text-yellow-500" />
+          {starCount}
+        </span>
+      </a>
+
       <main className="max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold mb-8">Tag Component Demo</h1>
+        <h1 className="text-2xl font-bold mb-8">React Tags Component Demo</h1>
         {demoSections.map((section, index) => (
           <DemoBlock key={index} {...section} />
         ))}
