@@ -231,6 +231,97 @@ export default function Home() {
           />
         </>
       )
+    },
+    {
+      title: 'Event Handling',
+      description: 'Event handling demonstration',
+      content: (
+        <>
+          <Tag 
+            text="Stop Propagation" 
+            color="blue" 
+            interactive={["scale"]}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              alert('Click event propagation stopped');
+            }} 
+          />
+          <Tag 
+            text="Get Event Info" 
+            color="green" 
+            interactive={["scale"]}
+            onClick={(event) => {
+              alert(`Click coordinates: x=${event.clientX}, y=${event.clientY}`);
+            }} 
+          />
+          <Tag 
+            text="Custom Callback" 
+            color="purple" 
+            interactive={["scale"]}
+            onClick={(event) => {
+              event.preventDefault();
+              console.log('Event object:', event);
+              alert('Check console for complete event details');
+            }} 
+          />
+        </>
+      )
+    },
+    {
+      title: 'Child Elements and Style Props',
+      description: 'Demonstrating child elements and custom styles',
+      content: (
+        <>
+          <Tag style={{ marginRight: 8, backgroundColor: '#f0f0f0' }}>
+            Custom Style Tag
+          </Tag>
+          
+          <Tag 
+            style={{ cursor: 'pointer', backgroundColor: '#e6f7ff' }}
+            onClick={(e) => {
+              e.stopPropagation();
+              alert('Click event triggered and bubbling prevented');
+            }}
+          >
+            Clickable Tag
+          </Tag>
+
+          <Tag 
+            style={{ 
+              marginRight: 5, 
+              marginBottom: 5, 
+              cursor: "pointer",
+              backgroundColor: '#f6ffed'
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open('https://scholar.google.com/scholar?q=react', '_blank');
+            }}
+          >
+            Google Scholar
+          </Tag>
+        </>
+      )
+    },
+    {
+      title: 'Event Handling Examples',
+      description: 'Demonstrating event handling and bubble control',
+      content: (
+        <div onClick={() => alert('Parent element clicked')}>
+          <p className="mb-2 text-gray-600">Click tag to test event bubbling (tag prevents bubbling to parent)</p>
+          <Tag 
+            style={{ backgroundColor: '#fff0f6' }}
+            onClick={(e) => {
+              e.stopPropagation();
+              alert('Tag clicked (event bubbling prevented)');
+              console.log('Tag clicked (event bubbling prevented)',e);
+            }}
+          >
+            Stop Bubbling Example
+          </Tag>
+        </div>
+      )
     }
   ];
 
